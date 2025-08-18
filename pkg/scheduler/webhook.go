@@ -66,7 +66,7 @@ func (h *webhook) Handle(_ context.Context, req admission.Request) admission.Res
 		klog.Infof(template+" - Pod already has different scheduler assigned", req.Namespace, req.Name, req.UID)
 		return admission.Allowed("pod already has different scheduler assigned")
 	}
-	klog.Infof(template, pod.Namespace, pod.Name, pod.UID)
+	klog.Infof(template+" - Checking resources and scheduler assignment", pod.Namespace, pod.Name, pod.UID)
 	hasResource := false
 	for idx, ctr := range append(pod.Spec.Containers, pod.Spec.InitContainers...) {
 		c := &pod.Spec.Containers[idx]
