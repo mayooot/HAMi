@@ -68,7 +68,7 @@ func (h *webhook) Handle(_ context.Context, req admission.Request) admission.Res
 	}
 	klog.Infof(template+" - Checking resources and scheduler assignment", pod.Namespace, pod.Name, pod.UID)
 	hasResource := false
-	for idx, ctr := range append(pod.Spec.Containers, pod.Spec.InitContainers...) {
+	for idx, ctr := range pod.Spec.Containers {
 		c := &pod.Spec.Containers[idx]
 		if ctr.SecurityContext != nil {
 			if ctr.SecurityContext.Privileged != nil && *ctr.SecurityContext.Privileged {
